@@ -5,8 +5,15 @@
  */
 package br.edu.ifsp.tads.dsw.sisfin.servlet;
 
+import br.edu.ifsp.tads.dsw.sisfin.DAO.ConnectionFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,29 +44,22 @@ public class AddClient extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
 
-        System.out.println("Parameters");
-        System.out.println(name);
-        System.out.println(email);
-        //Insert on DB HERE!!!!
-
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Ola</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Modulo: Client</h1><hr>");
-            out.println("<div><b>Nome</b>: "+ request.getParameter("name") + "</div>");
-            out.println("<div><b>Email</b>: "+ request.getParameter("email") + "</div>");
-            out.println("<hr>");
-            out.println("<a href=\"/WSisFin1/sisfin.html\">Back</a>");
-            out.println("</body>");
-            out.println("</html>");
+        Connection conn = new ConnectionFactory().getConnection();
+        String sql = "insert into CLIENT (name,email) values (?,?)";
+        
+        try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1,name);
+            stmt.setString(2,email);
+            stmt.execute();
+            conn.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-            //RequestDispatcher rd = request.getRequestDispatcher("jsp/clientDetailsView.jsp");
-            //rd.forward(request, response);
+        
+        
+        
+        RequestDispatcher rd = request.getRequestDispatcher("jsp/clientDetailsView.jsp");
+        rd.forward(request, response);
         }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
