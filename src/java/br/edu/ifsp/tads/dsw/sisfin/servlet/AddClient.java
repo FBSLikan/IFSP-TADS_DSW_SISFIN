@@ -51,8 +51,8 @@ public class AddClient extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Modulo: Client</h1><hr>");
-            out.println("<div><b>Nome</b>: <%=request.getParameter(\"name\")%></div>");
-            out.println("<div><b>Email</b>: ${param.email}</div>");
+            out.println("<div><b>Nome</b>: "+ request.getParameter("name") + "</div>");
+            out.println("<div><b>Email</b>: "+ request.getParameter("email") + "</div>");
             out.println("<hr>");
             out.println("<a href=\"/WSisFin1/sisfin.html\">Back</a>");
             out.println("</body>");
