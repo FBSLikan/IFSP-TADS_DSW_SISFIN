@@ -5,7 +5,9 @@
  */
 package br.edu.ifsp.tads.dsw.sisfin.servlet;
 
+import br.edu.ifsp.tads.dsw.sisfin.DAO.ClientDAO;
 import br.edu.ifsp.tads.dsw.sisfin.DAO.ConnectionFactory;
+import br.edu.ifsp.tads.dsw.sisfin.model.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -43,22 +45,20 @@ public class AddClient extends HttpServlet {
 
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-
-        Connection conn = new ConnectionFactory().getConnection();
-        String sql = "insert into CLIENT (name,email) values (?,?)";
+        String msgObj = "";
         
-        try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1,name);
-            stmt.setString(2,email);
-            stmt.execute();
-            conn.commit();
-        } catch (SQLException ex) {
-            Logger.getLogger(AddClient.class.getName()).log(Level.SEVERE, null, ex);
+        Client cli = new Client(name,email);
+        ClientDAO dao = new ClientDAO();
+        
+        if (dao.add(cli)) {
+            msgObj = "Registro Inserido com Sucesso!";
+        } else {
+            msgObj = "Registro não inserido!";
         }
         
+        request.setAttribute("msgAttr", msgObj);
         
-        
-        RequestDispatcher rd = request.getRequestDispatcher("jsp/clientDetailsView.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("jsp/feedbackView.jsp");
         rd.forward(request, response);
         }
 
