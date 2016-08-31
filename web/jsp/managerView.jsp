@@ -9,13 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modulo Client</title>
+        <title>Tela de Gerenciamenot</title>
     </head>
     <body>
-        <h1>Modulo: Client</h1>
+        <h1>Modulo: Cliente</h1>
         <a href="addClientView.jsp">Add</a> |
         <a href="listClientView.jsp">List</a> |
         <a href="findClientView.jsp">Find</a>
+        <hr>
+        <h1>Modulo: Cartão</h1>
+        <a href="addCardView.jsp">Add</a> |
+        <a href="listCardView.jsp">List</a> |
+        <a href="findCardView.jsp">Find</a>
         <hr>
         <a href="../sisfin.html">Home</a>
     </body>

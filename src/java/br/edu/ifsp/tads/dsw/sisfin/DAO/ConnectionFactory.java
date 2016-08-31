@@ -18,7 +18,7 @@ public class ConnectionFactory {
     public Connection getConnection() {
         try {
             return DriverManager.getConnection(
-                    "jdbc:derby://localhost:1527/sisfin", "sisfin", "sisfin");
+                    "jdbc:derby://localhost:1527/SISFIN", "sisfin", "sisfin");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

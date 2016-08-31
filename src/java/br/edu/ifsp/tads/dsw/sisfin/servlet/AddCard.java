@@ -5,9 +5,9 @@
  */
 package br.edu.ifsp.tads.dsw.sisfin.servlet;
 
-import br.edu.ifsp.tads.dsw.sisfin.DAO.ClientDAO;
+import br.edu.ifsp.tads.dsw.sisfin.DAO.CardDAO;
 import br.edu.ifsp.tads.dsw.sisfin.DAO.ConnectionFactory;
-import br.edu.ifsp.tads.dsw.sisfin.model.Client;
+import br.edu.ifsp.tads.dsw.sisfin.model.Card;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -23,11 +23,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author carloseduardobeluzo
- */
-@WebServlet(name = "AddClient", urlPatterns = {"/AddClient.do"})
+
+@WebServlet(name = "AddCard", urlPatterns = {"/AddCard.do"})
+
 public class AddCard extends HttpServlet {
 
     /**
@@ -43,17 +41,17 @@ public class AddCard extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String name = request.getParameter("numero");
-        String email = request.getParameter("email");
+        String numero = request.getParameter("numero");
+        String validade = request.getParameter("validade");
         String msgObj = "";
         
-        Client cli = new Client(name,email);
-        ClientDAO dao = new ClientDAO();
+        Card clicard = new Card(numero, validade);
+        CardDAO dao = new CardDAO();
         
-        if (dao.add(cli)) {
-            msgObj = "Registro Inserido com Sucesso!";
+        if (dao.add(clicard)) {
+            msgObj = "Cartão Inserido com Sucesso!";
         } else {
-            msgObj = "Registro não inserido!";
+            msgObj = "Cartão não inserido!";
         }
         
         request.setAttribute("msgAttr", msgObj);
