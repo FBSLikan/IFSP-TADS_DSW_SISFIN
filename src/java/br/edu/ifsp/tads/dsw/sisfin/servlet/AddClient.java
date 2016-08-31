@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author carloseduardobeluzo
  */
 @WebServlet(name = "AddClient", urlPatterns = {"/AddClient.do"})
-public class AddCard extends HttpServlet {
+public class AddClient extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +43,7 @@ public class AddCard extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String name = request.getParameter("numero");
+        String name = request.getParameter("name");
         String email = request.getParameter("email");
         String msgObj = "";
         

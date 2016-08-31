@@ -30,7 +30,7 @@ public class CardDAO {
     public boolean add(Card clicard) {
         this.sql = "insert into CARD (Number,Validade) values (?,?)";
         try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1,clicard.getNumber());
+            stmt.setInt(1,clicard.getNumber());
             stmt.setString(2,clicard.getValidade());
             stmt.execute();
             conn.commit();

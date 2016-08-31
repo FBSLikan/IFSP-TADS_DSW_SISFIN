@@ -41,7 +41,7 @@ public class AddCard extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String numero = request.getParameter("numero");
+        int numero = Integer.parseInt(request.getParameter());
         String validade = request.getParameter("validade");
         String msgObj = "";
         

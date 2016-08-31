@@ -18,7 +18,7 @@ public class Card {
         this.validade = validade;
     }
     
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
